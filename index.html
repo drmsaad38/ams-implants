@@ -4,403 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AMS Implants and Orthobiologics</title>
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #ffffff;
-            --section-bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --accent: #0284c7; 
-            --accent-light: #e0f2fe;
-            --border: #e2e8f0;
-            --sidebar-width: 310px;
-            --transition: all 0.3s ease;
-        }
-
-        * {
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            background-color: #ffffff;
+            color: #0f172a;
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Top Header Ribbon Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 4%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 90;
-            background: rgba(255, 255, 255, 0.95);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.25rem;
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        .menu-trigger {
-            background: var(--bg-color);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 0.6rem 1.2rem;
-            cursor: pointer;
-            border-radius: 6px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: var(--transition);
-        }
-
-        .menu-trigger:hover {
-            border-color: var(--accent);
-            background: var(--accent-light);
-            color: var(--accent);
-        }
-
-        /* Hierarchical Sidebar Navigation Menu */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: calc(-1 * var(--sidebar-width));
-            width: var(--sidebar-width);
-            height: 100vh;
-            background: #ffffff;
-            border-right: 1px solid var(--border);
-            z-index: 200;
-            padding: 2.5rem 1.75rem;
-            overflow-y: auto;
-            transition: var(--transition);
-        }
-
-        .sidebar.open {
-            left: 0;
-        }
-
-        .close-sidebar {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.75rem;
-            cursor: pointer;
-            float: right;
-            margin-bottom: 1rem;
-        }
-
-        .sidebar-brand {
-            font-weight: 700;
-            margin-bottom: 2.5rem;
-            clear: both;
-            font-size: 1.15rem;
-            color: var(--accent);
-            line-height: 1.4;
-            border-bottom: 2px solid var(--accent-light);
-            padding-bottom: 1rem;
-        }
-
-        .menu-group {
-            margin-bottom: 2rem;
-        }
-
-        .menu-heading {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            color: var(--text-main);
-            margin-bottom: 0.75rem;
-            font-weight: 700;
-        }
-
-        .menu-links {
-            list-style: none;
-        }
-
-        .menu-links li {
-            margin-bottom: 0.5rem;
-        }
-
-        .menu-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            display: block;
-        }
-
-        .menu-links a:hover {
-            color: var(--accent);
-            padding-left: 6px;
-        }
-
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(15, 23, 42, 0.3);
-            z-index: 150;
-            display: none;
-        }
-
-        .sidebar-overlay.active {
-            display: block;
-        }
-
-        /* Bright Hero Framework with Fallback Structure */
-        .hero-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 100vh;
-            padding: 0 6%;
-            align-items: center;
-            margin-top: 50px;
-            gap: 2rem;
-            background-color: #f8fafc;
-            background-image: linear-gradient(to right, rgba(255,255,255,0.95) 40%, rgba(255,255,255,0.8) 100%), url('https://unsplash.com');
-            background-size: cover;
-            background-position: right center;
-        }
-
-        .hero-text h1 {
-            font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            letter-spacing: -1.5px;
-        }
-
-        .hero-text h1 .brand-title {
-            display: block;
-            font-size: clamp(3.2rem, 6.5vw, 6rem);
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-text p {
-            color: var(--text-muted);
-            font-size: 1.15rem;
-            margin-bottom: 2rem;
-            max-width: 540px;
-        }
-
-        /* Clean High-Contrast Graphic Stand-In */
-        .graphic-fallback-box {
-            width: 100%;
-            height: 400px;
-            background: #ffffff;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        header {
+            background-color: #0284c7;
+            color: white;
+            padding: 3rem 2rem;
             text-align: center;
-            padding: 2rem;
         }
-
-        .graphic-circle-icon {
-            width: 120px;
-            height: 120px;
-            border: 4px dashed var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            animation: slowSpin 12s linear infinite;
-        }
-
-        @keyframes slowSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Main Structural Layout Sections */
-        section {
-            padding: 7rem 6%;
-        }
-
-        #mission {
-            background-color: var(--section-bg);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 2.5rem;
-            letter-spacing: -0.75px;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        #mission .mission-content {
-            max-width: 850px;
-            font-size: 1.25rem;
-            color: #334155;
-            line-height: 1.8;
-        }
-
-        /* Clinical Team Registry Grid Framework */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .team-member {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 2.2rem 2rem;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .member-header {
-            margin-bottom: 1.25rem;
-        }
-
-        .member-role {
-            font-size: 0.75rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 700;
-            margin-bottom: 0.6rem;
-        }
-
-        .member-name {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-        }
-
-        .member-title {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            font-weight: 400;
-            line-height: 1.4;
-        }
-
-        .member-affiliation {
-            font-size: 0.85rem;
-            color: #475569;
-            background-color: var(--section-bg);
-            border-top: 1px solid var(--border);
-            padding: 0.75rem 1rem;
-            margin-top: 1.5rem;
-            font-style: italic;
-            border-radius: 4px;
-        }
-
-        @media (max-width: 950px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                padding-top: 80px;
-                text-align: center;
-            }
-            .graphic-fallback-box {
-                height: 320px;
-            }
-        }
+        h1 { margin: 0; font-size: 2.5rem; }
+        .container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+        section { margin-bottom: 3rem; }
+        h2 { color: #0284c7; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+        .member { background: #f8fafc; border: 1px solid #e2e8f0; padding: 1.5rem; border-radius: 8px; }
+        .role { color: #0284c7; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; }
+        .name { font-size: 1.2rem; font-weight: bold; margin: 0.25rem 0; }
+        .title { color: #64748b; font-size: 0.95rem; }
+        .affil { margin-top: 0.75rem; font-size: 0.85rem; font-style: italic; color: #475569; }
     </style>
 </head>
 <body>
 
-    <div class="sidebar-overlay" id="overlay" onclick="toggleMenu(false)"></div>
+    <header>
+        <h1>AMS Implants and Orthobiologics</h1>
+        <p>Advanced Structural Hardware and Tissue Regeneration Frameworks</p>
+    </header>
 
-    <!-- Customized Hierarchical Panel -->
-    <aside class="sidebar" id="sidebar">
-        <button class="close-sidebar" onclick="toggleMenu(false)">&times;</button>
-        <div class="sidebar-brand">AMS Implants and Orthobiologics</div>
-        
+    <div class="container">
+        <section>
+            <h2>Our Mission</h2>
+            <p>To redefine standard patient recovery trajectories by bridging structural implant excellence with native biomechanical orthobiologic growth frameworks. We focus on engineering high-integrity stabilization systems that harmoniously empower biological bone and tissue integration layers.</p>
+        </section>
 
-All Products
+        <section>
+            <h2>Meet the Team</h2>
+            <div class="team-grid">
+                
+                <div class="member">
+                    <div class="role">CEO</div>
+                    <div class="name">Dr. Faiza Asmat</div>
+                    <div class="title">Consultant General Practitioner, Dermatologist, and Aesthetician</div>
+                    <div class="affil">Royal College of General Practitioners</div>
+                </div>
 
-1. Novel Cage
-2. Recombinant BMP Graft
-3. Product 4
-4. Product 5
+                <div class="member">
+                    <div class="role">Founder & Managing Director</div>
+                    <div class="name">Prof. Dr. Athar Muniruddin Siddiqui</div>
+                    <div class="title">Orthopedics and Spinal Surgeon</div>
+                    <div class="affil">Royal College of Surgeons, England</div>
+                </div>
 
-The Network
+                <div class="member">
+                    <div class="role">CFO & Legal Lead</div>
+                    <div class="name">Dr. M. Saad Shahid</div>
+                    <div class="title">Resident Orthopedic Surgeon and Legal Lead</div>
+                    <div class="affil">AMS Executive Operations</div>
+                </div>
 
-1. Collaborating Hospitals
-2. Our Network
-3. Expansion Plans
+                <div class="member">
+                    <div class="role">On Ground Support Lead</div>
+                    <div class="name">Dr. Muhammad Hassam</div>
+                    <div class="title">Resident Orthopedic Surgeon Specializing in Sports</div>
+                    <div class="affil">Clinical Operations Field Division</div>
+                </div>
 
-Careers
+                <div class="member">
+                    <div class="role">Management Lead</div>
+                    <div class="name">Dr. Muhammad Hassan</div>
+                    <div class="title">Physiotherapist and Rehabilitation Supervisor</div>
+                    <div class="affil">Patient Strategy & Rehabilitation Matrix</div>
+                </div>
 
-Explore Open Roles
+                <div class="member">
+                    <div class="role">Procurement Lead</div>
+                    <div class="name">Dr. Muhammad Qasim Idrees</div>
+                    <div class="title">Physiotherapist</div>
+                    <div class="affil">Biomaterial Acquisition & Supply Chain</div>
+                </div>
 
-Contact Us
+                <div class="member">
+                    <div class="role">Logistics & Strategy</div>
+                    <div class="name">Dr. Ahmed Koreja</div>
+                    <div class="title">Resident Orthopedic Surgeon and Expansion Strategist</div>
+                    <div class="affil">Global Distribution Network Architecture</div>
+                </div>
 
-Submit Global Inquiries
+                <div class="member">
+                    <div class="role">Marketing & Development</div>
+                    <div class="name">Dr. Arham Azizi</div>
+                    <div class="title">Resident Orthopedic Surgeon and Marketing Manager</div>
+                    <div class="affil">Strategic Clinical Relations and Communication</div>
+                </div>
 
+            </div>
+        </section>
+    </div>
 
-AMS Implants
-Menu
-AMS
-Implants and 
-orthobiologics.
-Advancing orthopedic recovery architectures through advanced structural hardware matrix arrays and biological tissue regeneration frameworks.
-AMS
-Biomechanical Cage Array
-Continuous structural low-speed orientation preview
-
-© 2026 AMS Implants and Orthobiologics. All designs protected.
-function toggleMenu(open) {
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('overlay');
-if (open) {
-sidebar.classList.add('open');
-overlay.classList.add('active');
-} else {
-sidebar.classList.remove('open');
-overlay.classList.remove('active');
-}
-}
+</body>
+</html>
